@@ -44,8 +44,7 @@
 
         socket.onopen = function(event) {
             console.log("WebSocket connection established.");
-            timeWhenSentInPage = Date.now();
-            sendInteger(integerToSyncOffset);
+           
           };
 
         socket.onmessage = function(event) {
@@ -68,6 +67,8 @@
                         var messageInt = parseInt(messageSplit[1]);
                         document.getElementById("HelloValidation").innerText = `Received message ${messageInt}: ${message}`;
                     }
+                            
+                    sendInteger(integerToSyncOffset);
                 }
                 if (event.data instanceof Blob) {
                     // Received binary message as a Blob
