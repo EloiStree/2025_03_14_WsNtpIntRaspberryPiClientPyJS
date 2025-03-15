@@ -575,7 +575,7 @@ async def main():
     loop = asyncio.get_event_loop()
     tasks = [
         loop.create_task(websocket_client()),
-        loop.create_task(udp_listener()),
+        #loop.create_task(udp_listener()),
         loop.create_task(console_handler())
     ]
     await asyncio.gather(*tasks)
