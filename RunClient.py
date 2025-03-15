@@ -570,24 +570,23 @@ def integer_to_gpio(integer):
     
     
     
-    
-async def main():
-    
-    
-    loop = asyncio.get_event_loop()
-    
-    tunnel =   loop.create_task(websocket_client()),
-    console=    loop.create_task(console_handler()),
-    udp =    loop.create_task(udp_listener()),
-    
-    ## Run all tasks on different threads
-    await asyncio.gather(*tunnel, *console, *udp)
 
 
 
+def run_in_thread(coroutine):
+    loop = asyncio.new_event_loop()
+    asyncio.set_event_loop(loop)
+    loop.run_until_complete(coroutine)
 
 if __name__ == "__main__":
-    
-    
-    asyncio.run(main())
-    
+    ws_thread = threading.Thread(target=run_in_thread, args=(websocket_client(),))
+    console_thread = threading.Thread(target=run_in_thread, args=(console_handler(),))
+    udp_thread = threading.Thread(target=run_in_thread, args=(udp_listener(),))
+
+    ws_thread.start()
+    console_thread.start()
+    udp_thread.start()
+
+    ws_thread.join()
+    console_thread.join()
+    udp_thread.join()
