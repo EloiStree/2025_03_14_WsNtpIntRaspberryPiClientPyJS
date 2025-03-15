@@ -37,7 +37,7 @@ ws_int_server = "ws://apint.ddns.net:4615"
 
 udp_listener_ip_mask= "0.0.0.0" # all sources
 udp_listener_ip_mask= "127.0.0.1" # localhost only
-udp_listener_port = 3615
+udp_listener_port = 3620
 
 udp_boardcast_server_to_local =[
     "127.0.0.1:7000",
@@ -572,10 +572,12 @@ def integer_to_gpio(integer):
     
     
 async def main():
+    
+    
     loop = asyncio.get_event_loop()
     tasks = [
         loop.create_task(websocket_client()),
-        #loop.create_task(udp_listener()),
+        loop.create_task(udp_listener()),
         loop.create_task(console_handler())
     ]
     await asyncio.gather(*tasks)
@@ -585,4 +587,7 @@ async def main():
 
 
 if __name__ == "__main__":
+    
+    threading
+    
     asyncio.run(main())
