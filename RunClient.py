@@ -575,19 +575,19 @@ async def main():
     
     
     loop = asyncio.get_event_loop()
-    tasks = [
-        loop.create_task(websocket_client()),
-        loop.create_task(udp_listener()),
-        loop.create_task(console_handler())
-    ]
-    await asyncio.gather(*tasks)
-
+    
+    tunnel =   loop.create_task(websocket_client()),
+    console=    loop.create_task(console_handler()),
+    udp =    loop.create_task(udp_listener()),
+    
+    ## Run all tasks on different threads
+    await asyncio.gather(*tunnel, *console, *udp)
 
 
 
 
 if __name__ == "__main__":
     
-    threading
     
     asyncio.run(main())
+    
