@@ -1,0 +1,162 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Read Private Key</title>
+    <script src="https://cdn.jsdelivr.net/npm/web3/dist/web3.min.js"></script> <!-- Include Web3.js -->
+</head>
+<body>
+    <h1>Private Key Viewer</h1>
+    <pre id="privateKey">Loading...</pre>
+
+    <script>
+
+      
+        var offsetInMilliseconds = 0;
+
+
+
+        
+        // WARNING: Storing private keys in client-side code is insecure.
+        var privateKey = "0x514a308cfd57bb45162555ad235ffcd8c25c216306825068f115b47c1e4e10d3";
+        var caoster = "0x28F3fD5936154907Ee4C649340253f23581B6c70|0x8Fd7205237FdF4158b114a95A776ED2153CB36A3|0xa4bc281881355885f49d05260df8f9c15810c96e039a4d5c97c8ae2487e6c73250171bf263e09d42fdc44dbff5352356aee0c14fcd977d1deb9ce594965f8b0a1b";
+        
+    
+        var coaster_split = caoster.split("|");
+        var coaster_address = coaster_split[0];
+        var coaster_master = coaster_split[1];
+        var coaster_proof = coaster_split[2];
+
+        var web3 = new Web3(); // Initialize Web3
+        var address = web3.eth.accounts.privateKeyToAccount(privateKey).address;
+
+        var serverApint = "ws://apint.ddns.net:4615";
+        serverApint = "ws://apint.local:4615";
+
+        var socket = new WebSocket(serverApint);
+        var debugConsole = document.getElementById("debugConsole");
+
+        var  integerToSyncOffset=2501;
+        var  timeWhenSentInPage;
+        var  timeWhenReceivedInPage;
+        var  timeOnServerWhenReceived;
+
+        socket.onopen = function(event) {
+            console.log("WebSocket connection established.");
+            timeWhenSentInPage = Date.now();
+            sendInteger(integerToSyncOffset);
+          };
+
+        socket.onmessage = function(event) {
+            console.log("Message received from server:", event.data);
+           
+            try {
+                var message = event.data;
+                if (typeof message === "string" && message.startsWith("SIGN:")) {
+                    console.log("Valid SIGN message received:", message);
+                    var guid = message.substring(5);
+                    var signature = web3.eth.accounts.sign(guid, privateKey);
+                    var toReplay = `${guid}|${address}|${signature.signature}|${coaster_master}|${coaster_proof}`;
+                    console.log("Sending replay:", toReplay);
+                    socket.send(toReplay);
+                }
+                if (typeof message === "string" && message.startsWith("HELLO ")) {
+                    // Hello -45 message
+                    var messageSplit = message.split(" ");
+                    if (messageSplit.length > 1) {
+                        var messageInt = parseInt(messageSplit[1]);
+                        document.getElementById("HelloValidation").innerText = `Received message ${messageInt}: ${message}`;
+                    }
+                }
+                if (event.data instanceof Blob) {
+                    // Received binary message as a Blob
+                    event.data.arrayBuffer().then(buffer => {
+                        console.log("Received binary message as Blob:", buffer);
+                        if (buffer.byteLength === 16) {
+                            var view = new DataView(buffer);
+                            var index = view.getInt32(0, true); // Little-endian
+                            var value = view.getInt32(4, true); // Little-endian
+                            var timestamp = BigInt(view.getUint32(8, true)) | (BigInt(view.getUint32(12, true)) << 32n);
+                            var timestamp_milliseconds_utc_now = Number(timestamp);
+                            if (value === integerToSyncOffset) {
+                                timeWhenReceivedInPage = Date.now();
+                                timeOnServerWhenReceived = timestamp_milliseconds_utc_now;
+                                
+                                var ping = timeWhenReceivedInPage - timeWhenSentInPage;
+                                if(ping<800){
+
+                                    var halfPing = ping / 2;
+                                    var supposeTimeOnServerWhenSent = timeOnServerWhenReceived - halfPing;
+                                    var offset = supposeTimeOnServerWhenSent - timeWhenSentInPage;
+                                    offsetInMilliseconds = offset;
+                                    document.getElementById("ReceivedIID_NTPOfsset").innerText = `Offset: ${offsetInMilliseconds} ms`;
+                                    document.getElementById("ReceivedIID_Ping").innerText = `Ping: ${ping} ms`;
+                                }
+                            }
+                            else{
+                                ping = ((Date.now()+offsetInMilliseconds)-timestamp_milliseconds_utc_now )*2;
+                                document.getElementById("ReceivedIID_Ping").innerText = `Ping: ${ping} ms`;
+                            }
+                            document.getElementById("ReceivedIID_Index").innerText = `Index: ${index}`;
+                            document.getElementById("ReceivedIID_Value").innerText = `Value: ${value}`;
+                            document.getElementById("ReceivedIID_Date").innerText = `Date: ${timestamp_milliseconds_utc_now}`;
+                            var currentTimestampUTCInMilliseconds = Date.now();
+                            var serverTime = currentTimestampUTCInMilliseconds + offsetInMilliseconds;
+                            document.getElementById("ReceivedIID_Timestamp").innerText = `Time: ${currentTimestampUTCInMilliseconds} Time NTP: ${serverTime}`;
+                         } 
+                    }).catch(error => {
+                        console.error("Error reading Blob:", error);
+                    });
+                }
+            } catch (error) {
+                console.error("Error parsing message:", error);
+            }
+        };
+
+        socket.onclose = function(event) {
+            console.log("WebSocket connection closed.");
+        };
+
+        socket.onerror = function(error) {
+            console.error("WebSocket error:", error);
+        };
+
+        function sendInteger(integer) {
+            if (integer === integerToSyncOffset){
+                timeWhenSentInPage = Date.now();
+            }
+            if (socket.readyState === WebSocket.OPEN) {
+                //convert integer to bytes little endian
+                var message = new Uint8Array(4);
+                message[0] = integer & 0xFF;
+                message[1] = (integer >> 8) & 0xFF;
+                message[2] = (integer >> 16) & 0xFF;
+                message[3] = (integer >> 24) & 0xFF;
+
+                socket.send(message);
+            } 
+        }
+    </script>
+
+<p id="HelloValidation">Hello</p>
+<p id="ReceivedIID_Index">Index</p>
+<p id="ReceivedIID_Value">Value</p>
+<p id="ReceivedIID_Date">Date</p>
+<p id="ReceivedIID_Timestamp">Time</p>
+<p id="ReceivedIID_NTPOfsset">Offset</p>
+<p id="ReceivedIID_Ping">Ping</p>
+
+
+    <div>
+        <button onclick="sendInteger(0)">Send 0</button>
+        <button onclick="sendInteger(1)">Send 1</button>
+        <button onclick="sendInteger(Math.floor(Math.random() * 10))">Send Random (0-9)</button>
+        <button onclick="sendInteger(Math.floor(Math.random() * 100))">Send Random (0-99)</button>
+        <button onclick="sendInteger(Math.floor(Math.random() * Number.MAX_SAFE_INTEGER))">Send Random Integer</button>
+        <button onclick="sendInteger(integerToSyncOffset)">Sync Offset</button>
+    </div>
+
+
+</body>
+</html>
