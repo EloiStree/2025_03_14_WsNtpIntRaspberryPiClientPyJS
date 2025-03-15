@@ -413,7 +413,7 @@ async def handle_raspberry_pi():
         AllowedReadGPIO(27, 20027, 20027),
     ]
     list_read_gpio = [
-        AllowedReadGPIO(4, 20017, 20017),
+        # AllowedReadGPIO(4, 20017, 20017),
         # AllowedReadGPIO(17, 20017, 20017),
         # AllowedReadGPIO(18, 20018, 20018),
         # AllowedReadGPIO(22, 20022, 20022),
@@ -520,7 +520,7 @@ def integer_to_gpio(integer):
     | Allowed by dev 40 | 1480 |2480|
     """    
     list_of_allowed_gpio=[4,17,18,22,23,24,25,27]
-    list_of_allowed_gpio=[17,18,22,23,24,25,27]
+    list_of_allowed_gpio=[4,27,21,13]
     allowed = []
     count =1
     for gpio_index in list_of_allowed_gpio:
