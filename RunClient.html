@@ -7,9 +7,7 @@
     <script src="https://cdn.jsdelivr.net/npm/web3/dist/web3.min.js"></script> <!-- Include Web3.js -->
 </head>
 <body>
-    <h1>Private Key Viewer</h1>
-    <pre id="privateKey">Loading...</pre>
-
+    
     <script>
 
       
@@ -33,6 +31,7 @@
 
         var serverApint = "ws://apint.ddns.net:4615";
         serverApint = "ws://apint.local:4615";
+        serverApint = "ws://apint.ddns.net:4615";
 
         var socket = new WebSocket(serverApint);
         var debugConsole = document.getElementById("debugConsole");
@@ -158,6 +157,37 @@
         <button onclick="sendInteger(integerToSyncOffset)">Sync Offset</button>
     </div>
 
+    <div><br/>
+        <button onclick="sendInteger(101)">Start 101</button>
+        <button onclick="sendInteger(201)">Stop 201</button><br/>
+        <button onclick="sendInteger(102)">Shield on 102</button>
+        <button onclick="sendInteger(202)">Shield off 202</button>
+        <button onclick="sendInteger(103)">Alarm on 103</button>
+        <button onclick="sendInteger(203)">Alarm off 203</button>
+        <button onclick="sendInteger(104)">Air Leak on 104</button>
+        <button onclick="sendInteger(204)">Air Leak off 204</button><br/>
+        <button onclick="sendInteger(305)">Big Asteroid hit 305</button>
+        <button onclick="sendInteger(205)">Big Asteroid hit 205</button>
+        <button onclick="sendInteger(105)">Big Asteroid hit 105</button><br/>
+        <button onclick="sendInteger(306)">Pipe Break hit 306</button>
+        <button onclick="sendInteger(307)">Motor in Fire hit 307</button><br/>
+        <button onclick="sendInteger(7)">Gandalf Sax 7</button>
+        <button onclick="sendInteger(404)">Rick Roll 404</button>
+        <button onclick="sendInteger(400)">Wololo 400</button><br/>
+        <button onclick="sendInteger(501)">Mission 1 Complete</button>
+        <button onclick="sendInteger(502)">Mission 2 Complete</button>
+        <button onclick="sendInteger(503)">Mission 3 Complete</button>
+        <button onclick="sendInteger(504)">Mission 4 Complete</button>
+        <button onclick="sendInteger(505)">Mission 5 Complete</button>
+        <br/>
+        <button onclick="sendInteger(601)">Set Game Time to 1 minutes</button>
+        <button onclick="sendInteger(602)">Set Game Time to 2 minutes</button>
+        <button onclick="sendInteger(603)">Set Game Time to 3 minutes</button>
+        <button onclick="sendInteger(604)">Set Game Time to 4 minutes</button>
+        <button onclick="sendInteger(605)">Set Game Time to 5 minutes</button>
+        <button onclick="sendInteger(610)">Set Game Time to 10 minutes</button>
+    
+        </div>
 
 </body>
 </html>

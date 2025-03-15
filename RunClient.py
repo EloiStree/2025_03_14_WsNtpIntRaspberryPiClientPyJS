@@ -7,6 +7,7 @@ git clone https://github.com/EloiStree/2025_03_14_WsNtpIntRaspberryPiClientPyJS.
 cd /git/apint_client/
 python3 RunClient.py
 """
+
 import socket
 import struct
 import web3
@@ -26,22 +27,34 @@ from datetime import datetime
 import tornado
 
 
+current_path_directory = os.path.dirname(os.path.realpath(__file__))
 
 relative_file_path_private_eth_key ="Keys/PrivateKey.txt"
 relative_file_path_public_eth_key ="Keys/Address.txt"
 relative_file_path_coaster ="Keys/CoasterOfAddress.txt"
 
+ntp_server = "apint.local"
+ws_int_server = "ws://apint.local:4615" 
+
 ntp_server = "apint.ddns.net"
 ws_int_server = "ws://apint.ddns.net:4615"  
 
 
-udp_listener_ip_mask= "0.0.0.0" # all sources
 udp_listener_ip_mask= "127.0.0.1" # localhost only
+udp_listener_ip_mask= "0.0.0.0" # all sources
 udp_listener_port = 3620
 
 udp_boardcast_server_to_local =[
     "127.0.0.1:7000",
 ]
+
+
+udp_additional_port=3621
+# IS the app receive a UDP 
+# The broadcast will also be sent to the additional UDP server
+# To Code later. (Useful for Raspberry Pi Pico mainly)
+additional_interaction_udp_server_ipv4=[]
+
 
 
 ntp_server_offset = 0
@@ -278,12 +291,20 @@ async def websocket_client():
                             print(f"Received binary data: {msg.data}")
                             dl = len(msg.data)
                             if dl == 4 or dl == 8 or dl == 16 or dl == 12:
-                                handle_bytes_as_integer(msg.data)
+                                int_found =handle_bytes_as_integer(msg.data)
                                 udp_client = socket.socket(socket.AF_INET, socket.SOCK_DGRAM)
                                 for udp_server in udp_boardcast_server_to_local:
                                     udp_server_ip, udp_server_port = udp_server.split(":")
                                     udp_server_port = int(udp_server_port)
                                     udp_client.sendto(msg.data, (udp_server_ip, udp_server_port))
+
+                                # ADD BROADCAST TO ADDITIONAL UDP SERVER
+                                for udp_server_ip in additional_interaction_udp_server_ipv4:
+                                    try:
+                                        udp_server_port = int(udp_server_port)
+                                        udp_client.sendto(msg.data, (udp_server_ip, udp_server_port))
+                                    except Exception as e:
+                                        pass
                                 print(f"Broadcast {dl} bytes to UDPs")
                                 
                         elif msg.type == aiohttp.WSMsgType.ERROR:
@@ -302,6 +323,7 @@ async def websocket_client():
 
 def handle_bytes_as_integer(data):
     dl = len(data)
+    integer=None
     if dl==4 or dl==8 or dl==16 or dl==12:
         if dl == 4:
             integer = struct.unpack("<i", data)
@@ -321,6 +343,7 @@ def handle_bytes_as_integer(data):
             handle_index_integer_received(index, integer)
             handle_integer_date_received(integer, date)
             handle_index_integer_date_received(index, integer, date)
+    return integer
             
             
 def handle_integer_received(integer):
@@ -393,6 +416,10 @@ async def udp_listener():
             dl = len(data)
             if dl == 4 or dl == 8 or dl == 16 or dl == 12:
                 await global_websocket.send(data, text=False)
+                if not(addr in udp_boardcast_server_to_local):
+                    udp_boardcast_server_to_local.append(addr)
+                    print ("Added to broadcast list: ", addr)   
+
                 print(f"Sent {dl} bytes to WebSocket server")            
         except Exception as e:
             print(f"Error unpacking integer: {e}")
