@@ -1,5 +1,12 @@
  
 
+
+"""
+pip  install web3 asyncio websockets eth_account ntplib tornado aiohttp  --break-system-packages
+git clone https://github.com/EloiStree/2025_03_14_WsNtpIntRaspberryPiClientPyJS.git /git/apint_client/
+cd /git/apint_client/
+python3 RunClient.py
+"""
 import socket
 import struct
 import web3
@@ -365,7 +372,6 @@ async def console_handler():
                     
         except Exception as e:
             print(f"Console error: {e}")
-            break
 
 
 async def udp_listener():
