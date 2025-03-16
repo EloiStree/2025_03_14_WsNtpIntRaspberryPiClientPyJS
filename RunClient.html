@@ -30,8 +30,8 @@
         var address = web3.eth.accounts.privateKeyToAccount(privateKey).address;
 
         var serverApint = "ws://apint.ddns.net:4615";
-        serverApint = "ws://apint.local:4615";
         serverApint = "ws://apint.ddns.net:4615";
+        serverApint = "ws://apint.local:4615";
 
         var socket = new WebSocket(serverApint);
         var debugConsole = document.getElementById("debugConsole");
