@@ -294,19 +294,20 @@ async def websocket_client():
                                 int_found =handle_bytes_as_integer(msg.data)
                                 udp_client = socket.socket(socket.AF_INET, socket.SOCK_DGRAM)
                                 for udp_server in udp_boardcast_server_to_local:
-                                    udp_server_ip, udp_server_port = udp_server.split(":")
-                                    udp_server_port = int(udp_server_port)
-                                    udp_client.sendto(msg.data, (udp_server_ip, udp_server_port))
-
-                                # ADD BROADCAST TO ADDITIONAL UDP SERVER
-                                for udp_server_ip in additional_interaction_udp_server_ipv4:
-                                    try:
+                                    if udp_server is not None:
+                                        udp_server_ip, udp_server_port = udp_server.split(":")
                                         udp_server_port = int(udp_server_port)
                                         udp_client.sendto(msg.data, (udp_server_ip, udp_server_port))
+
+                                for udp_server_ip in additional_interaction_udp_server_ipv4:
+                                    print(f"HERE to {udp_server_ip}:{udp_additional_port}")
+                                    try:
+                                        udp_server_port = int(udp_additional_port)
+                                        udp_client.sendto(msg.data, (udp_server_ip, udp_server_port))
                                     except Exception as e:
+                                        print(f"Error sending to {udp_server_ip}:{udp_server_port} {e}")
                                         pass
-                                print(f"Broadcast {dl} bytes to UDPs")
-                                
+                                print(f"Broadcast {dl} bytes to UDPs")    
                         elif msg.type == aiohttp.WSMsgType.ERROR:
                             print("WebSocket connection closed with exception:", ws.exception())
                             break
@@ -398,7 +399,6 @@ async def console_handler():
 
 
 async def udp_listener():
-    
     ip = udp_listener_ip_mask
     port = udp_listener_port
     sock = socket.socket(socket.AF_INET, socket.SOCK_DGRAM)
@@ -406,26 +406,31 @@ async def udp_listener():
     
     print(f">>> UDP listener started on {ip}:{port}")
     loop = asyncio.get_event_loop()
+    
     while True:
-        # Use asyncio to wait for data to arrive
-        data, addr = await loop.sock_recv(sock, 1024)
+        # Corrected line: Use `sock_recvfrom()` to receive both data and address
+        data, addr = await loop.sock_recvfrom(sock, 1024)  
+
         try:
             global global_websocket
-            if global_websocket == None:
+            if global_websocket is None:
                 continue
+
             dl = len(data)
-            if dl == 4 or dl == 8 or dl == 16 or dl == 12:
-                await global_websocket.send(data, text=False)
-                if not(addr in udp_boardcast_server_to_local):
-                    udp_boardcast_server_to_local.append(addr)
-                    print ("Added to broadcast list: ", addr)   
+            if dl in {4, 8, 12, 16}:  # Cleaner way to check allowed lengths
+                await global_websocket.send_bytes(data)
+                
+                ipv4 = addr[0]
+                if ipv4 not in additional_interaction_udp_server_ipv4:
+                    additional_interaction_udp_server_ipv4.append(ipv4)
+                    print("Added to broadcast list: ", ipv4)   
 
                 print(f"Sent {dl} bytes to WebSocket server")            
         except Exception as e:
-            print(f"Error unpacking integer: {e}")
+            print(f"Error processing data: {e}")
             print(f"Received data: {data}")
             print(f"Received from: {addr}")
-    
+
 
 bool_is_raspberry_pi = os.path.exists("/dev/tty")
 if bool_is_raspberry_pi:
