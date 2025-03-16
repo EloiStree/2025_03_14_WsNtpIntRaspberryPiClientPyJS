@@ -38,7 +38,7 @@ ws_int_server = "ws://apint.local:4615"
 
 ntp_server = "apint.ddns.net"
 ws_int_server = "ws://apint.ddns.net:4615"  
-
+ 
 
 udp_listener_ip_mask= "127.0.0.1" # localhost only
 udp_listener_ip_mask= "0.0.0.0" # all sources
