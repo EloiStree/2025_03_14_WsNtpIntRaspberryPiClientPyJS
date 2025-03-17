@@ -53,8 +53,13 @@ ssh-ed25519 AAAAC3NzaC1lZDI1NTE5AAAAIIS2syCcYRDf+O0sn+goxBnb6tKjYPZo6F0q/95TcPrd
 ```
 Then you can use this command and replace with yourse:
 
+Add the key to the allows user by ssh  
 ```
 mkdir -p ~/.ssh && chmod 700 ~/.ssh && echo "ssh-ed25519 AAAAC3NzaC1lZDI1NTE5AAAAIIS2syCcYRDf+O0sn+goxBnb6tKjYPZo6F0q/95TcPrd elois@Phenix" >> ~/.ssh/authorized_keys && chmod 600 ~/.ssh/authorized_keys && sudo systemctl restart ssh
 ```
 
+Connect as this user.
+```
+ssh -i ~/.ssh/eloistree_all_pi root@raspberrypi.local
+```
 
