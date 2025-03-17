@@ -33,13 +33,15 @@ lxterminal -e "python3 /git/apint_client/RunClient.py"
 
 --------------
 
-
+```
 su root
 
 sudo git clone https://github.com/EloiStree/2025_03_14_WsNtpIntRaspberryPiClientPyJS.git /git/apint_client
 rm Keys -r
 
 
+crontab -e
 
-@reboot sleep 20 && lxterminal -e "python3 /git/apint_client/RunClient.py"
-@reboot sleep 20 && chromium-browser /git/apint_client/RunClient.html
+@reboot lxterminal -e "python3 /git/apint_client/RunClient.py"
+@reboot chromium-browser /git/apint_client/RunClient.html
+```
