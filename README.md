@@ -28,4 +28,13 @@ lxterminal -e "python3 /home/student/Desktop/GitEdit/apint_client/RunClient.py"
 If you just need to run it without editing on the Pi directly:  
 ```
 lxterminal -e "python3 /git/apint_client/RunClient.py"
-```  
+```
+
+
+--------------
+
+
+su root
+
+sudo git clone https://github.com/EloiStree/2025_03_14_WsNtpIntRaspberryPiClientPyJS.git /git/apint_client
+rm Keys -r
