@@ -36,8 +36,8 @@ relative_file_path_coaster ="Keys/CoasterOfAddress.txt"
 
 ntp_server = "apint.ddns.net"
 ws_int_server = "ws://apint.ddns.net:4615"  
-ntp_server = "apint.local"
-ws_int_server = "ws://apint.local:4615" 
+ntp_server = "raspberrypi.local"
+ws_int_server = "ws://raspberrypi.local:4615" 
 
 udp_listener_ip_mask= "127.0.0.1" # localhost only
 udp_listener_ip_mask= "0.0.0.0" # all sources
@@ -266,7 +266,6 @@ wallet = EthUtility()
 import aiohttp
 import asyncio
 
-ws_int_server = "ws://apint.ddns.net:4615/"
 global_websocket = None
 async def websocket_client():
     global global_websocket
