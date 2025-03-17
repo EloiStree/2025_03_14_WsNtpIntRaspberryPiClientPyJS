@@ -42,9 +42,48 @@ rm Keys -r
 
 crontab -e
 
-@reboot lxterminal -e "python3 /git/apint_client/RunClient.py"
-@reboot chromium-browser /git/apint_client/RunClient.html
+@reboot /usr/bin/lxterminal -e "/usr/bin/python3 /git/apint_client/RunClient.py"
+@reboot /usr/bin/chromium-browser /git/apint_client/RunClient.html
+
 ```
+
+
+
+```
+sudo nano /etc/systemd/system/apint_client_pyjs.service
+```
+
+
+```
+
+[Unit]
+Description=APINT Client JSPY Startup Service
+After=network.target
+
+[Service]
+Type=oneshot
+ExecStart=/bin/bash -c "lxterminal -e 'python3 /git/apint_client/RunClient.py' & chromium-browser --no-sandbox /git/apint_client/RunClient.html"
+RemainAfterExit=yes
+User=root
+WorkingDirectory=/git/apint_client
+Environment=DISPLAY=:0
+Environment=XDG_RUNTIME_DIR=/run/user/1000
+
+[Install]
+WantedBy=multi-user.target
+
+
+```
+
+
+```
+sudo systemctl daemon-reload
+sudo systemctl enable apint_client_pyjs.service
+sudo systemctl start apint_client_pyjs.service
+
+```
+
+
 
 
 Create a SSH key on your window:
