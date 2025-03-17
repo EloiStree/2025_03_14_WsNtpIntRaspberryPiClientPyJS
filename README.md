@@ -38,3 +38,8 @@ su root
 
 sudo git clone https://github.com/EloiStree/2025_03_14_WsNtpIntRaspberryPiClientPyJS.git /git/apint_client
 rm Keys -r
+
+
+
+@reboot sleep 20 && lxterminal -e "python3 /git/apint_client/RunClient.py"
+@reboot sleep 20 && chromium-browser /git/apint_client/RunClient.html
