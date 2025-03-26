@@ -65,8 +65,8 @@ Description=APINT Client JSPY Startup Service
 After=network.target
 
 [Service]
-Type=oneshot
-ExecStart=/bin/bash -c "lxterminal -e 'python3 /git/apint_client/RunClient.py' & chromium-browser --no-sandbox /git/apint_client/RunClient.html"
+Type=forking
+ExecStart=/bin/bash -c "/usr/bin/lxterminal -e '/usr/bin/python3 /git/apint_client/RunClient.py' & /usr/bin/chromium-browser --no-sandbox /git/apint_client/RunClient.html &"
 RemainAfterExit=yes
 User=root
 WorkingDirectory=/git/apint_client
@@ -75,15 +75,32 @@ Environment=XDG_RUNTIME_DIR=/run/user/1000
 
 [Install]
 WantedBy=multi-user.target
+```
 
 
+
+
+```
+sudo nano /etc/systemd/system/apint_client_pyjs.timer
+```
+
+```
+[Unit]
+Description=Start apint_client_pyjs service 10 seconds after login
+After=default.target
+
+[Timer]
+OnBootSec=10s
+OnUnitActiveSec=0
+Unit=apint_client_pyjs.service
+
+[Install]
+WantedBy=timers.target
 ```
 
 
 ```
 sudo systemctl daemon-reload
-sudo systemctl enable apint_client_pyjs.service
-sudo systemctl start apint_client_pyjs.service
 
 ```
 
@@ -118,6 +135,34 @@ git clone https://github.com/EloiStree/2025_03_14_WsNtpIntRaspberryPiClientPyJS.
 
 Create the service to run the flask website on the Pi
 ```
+sudo nano /etc/systemd/system/apint_client_pyjs.service
+sudo nano /etc/systemd/system/apint_client_pyjs.timer
+sudo nano /etc/systemd/system/apint_flask.service
+sudo nano /etc/systemd/system/apint_flask.timer
+
+chmod +x /git/apint_client/RunClient.py
+chmod +x /git/apint_client/FlaskHost.py
+
+sudo systemctl daemon-reload
+
+sudo systemctl enable apint_client_pyjs.service
+sudo systemctl enable apint_client_pyjs.timer
+sudo systemctl restart apint_client_pyjs.timer
+
+sudo systemctl enable apint_flask.service
+sudo systemctl enable apint_flask.timer
+sudo systemctl restart apint_flask.timer
+```
+
+```
+sudo systemctl restart apint_flask.service
+sudo systemctl restart apint_client_pyjs.service
+```
+
+
+
+
+```
 sudo nano /etc/systemd/system/apint_flask.service
 ```
 
@@ -142,7 +187,6 @@ Create a time to keep alive the website if an error happens
 
 ```
 sudo nano /etc/systemd/system/apint_flask.timer
-
 ```
 
 ```

@@ -1,6 +1,15 @@
 
 
+# http://apint-home.ddns.net:8080/services
+# http://apint-home.ddns.net:8080/client
+# http://apint-home.ddns.net:8080/ntp
 
+# http://raspberrypi:8080/services
+# http://raspberrypi:8080/client
+# http://raspberrypi:8080/ntp
+
+
+import os
 import sys
 
 if sys.stdout.isatty():
@@ -18,23 +27,24 @@ else:
 
 
 
-from flask import Flask, render_template
+from flask import Flask, jsonify, render_template, request
 import subprocess
 import os
 import ntplib
-from datetime import datetime
+from datetime import datetime, timezone
+import time
 
 app = Flask(__name__,template_folder=os.path.dirname(os.path.abspath(__file__)))
 
 # List of services and timers to check
 services = [
     "ntp",
-    "apintio_push_iid.service",
-    "apintio_push_iid.timer",
-    "apintio_flask.service",
-    "apintio_flask.timer",
-    "apintio_client_pyjs.service",
-    "apintio_client_pyjs.timer"
+    "apint_push_iid.service",
+    "apint_push_iid.timer",
+    "apint_flask.service",
+    "apint_flask.timer",
+    "apint_client_pyjs.service",
+    "apint_client_pyjs.timer"
 ]
 
 def get_service_status(service):
@@ -88,24 +98,28 @@ def client_page():
 
 
 @app.route('/ntp')
-def ntp_status():
-    try:
+def ntp_page():
+    return render_template('WWW/client_ntp_page.html')
 
-        ntp_client = ntplib.NTPClient()
-        response = ntp_client.request('raspberrypi.local', port=123)
 
-        local_time = datetime.now()
-        ntp_time = datetime.fromtimestamp(response.tx_time, datetime.timezone.utc)
-        offset = response.offset
-        ntp_html = f"""
-        <h1>NTP Status</h1>
-        <p>Local Time: {local_time}</p>
-        <p>NTP Time: {ntp_time}</p>
-        <p>Offset: {offset} seconds</p>
-        """
-        return replace_body_in_default_html(ntp_html)
-    except Exception as e:
-        return replace_body_in_default_html(f"<h1>Error</h1><p>{e}</p>")
+@app.route('/ntp-offset', methods=['POST'])
+def ntp_post_offset():
+    data = request.get_json()
+
+    # Extract the timestamp from the request
+    client_timestamp = data.get('timestamp')
+
+    if client_timestamp is None:
+        return jsonify({'error': 'Timestamp not provided'}), 400
+
+    # Get the current server timestamp in milliseconds
+    server_timestamp = int(time.time() * 1000)
+
+    # Calculate the offset (server time minus client time)
+    offset = server_timestamp - client_timestamp
+
+    # Return the offset result
+    return jsonify({'offset': offset})
 
 if __name__ == '__main__':
     app.run(host='0.0.0.0', port=8080, debug=True)
