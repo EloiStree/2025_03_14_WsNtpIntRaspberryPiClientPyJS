@@ -106,3 +106,54 @@ Connect as this user.
 ssh -i ~/.ssh/eloistree_all_pi root@raspberrypi.local
 ```
 
+
+
+# Flask
+
+
+Git clone the code on the PI, if not done yet in previous steps.
+```
+git clone https://github.com/EloiStree/2025_03_14_WsNtpIntRaspberryPiClientPyJS.git /git/apint_client
+```
+
+Create the service to run the flask website on the Pi
+```
+sudo nano /etc/systemd/system/apint_flask.service
+```
+
+```
+[Unit]
+Description=APINT Flask Service
+After=network.target
+
+[Service]
+ExecStart=/usr/bin/python3 /git/apint_client/FlaskHost.py
+WorkingDirectory=/git/apint_client
+Restart=always
+User=root
+Environment=PYTHONUNBUFFERED=1
+
+[Install]
+WantedBy=multi-user.target
+
+```
+
+Create a time to keep alive the website if an error happens
+
+```
+sudo nano /etc/systemd/system/apint_flask.timer
+
+```
+
+```
+[Unit]
+Description=Check APINT Flask Service every 5 minutes
+
+[Timer]
+OnBootSec=5min
+OnUnitActiveSec=5min
+Unit=apint_flask.service
+
+[Install]
+WantedBy=timers.target
+```
