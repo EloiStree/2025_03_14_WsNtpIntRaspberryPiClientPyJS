@@ -1,42 +1,21 @@
-"""
-sudo nano /etc/systemd/system/apint_flask.service
-"""
 
 
-"""
-[Unit]
-Description=APINT Flask Service
-After=network.target
 
-[Service]
-ExecStart=/usr/bin/python3 /git/apint_client/FlaskHost.py
-WorkingDirectory=/git/apint_client
-Restart=always
-User=root
-Environment=PYTHONUNBUFFERED=1
+import sys
 
-[Install]
-WantedBy=multi-user.target
+if sys.stdout.isatty():
+    print("Running in a terminal.")
+    stop_service_script ="""
+    sudo systemctl stop apint_flask.service
+    sudo systemctl stop apint_flask.timer
+    """
 
-"""
+    # run code to stop current service
+    os.system(stop_service_script)
 
-"""
-sudo nano /etc/systemd/system/apint_flask.timer
+else:
+    print("Not running in a terminal.")
 
-"""
-
-"""
-[Unit]
-Description=Check APINT Flask Service every 5 minutes
-
-[Timer]
-OnBootSec=5min
-OnUnitActiveSec=5min
-Unit=apint_flask.service
-
-[Install]
-WantedBy=timers.target
-"""
 
 
 from flask import Flask, render_template
