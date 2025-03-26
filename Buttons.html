@@ -1,0 +1,261 @@
+
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Button Grid</title>
+    <style>
+         body {
+            background-color: black;
+            color: rgb(0, 255, 0);
+            margin: 0;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            height: 100vh;
+            font-family: Arial, sans-serif;
+        }
+        .GRID {
+            display: grid;
+            grid-template-columns: repeat(5, 1fr);
+            grid-template-rows: repeat(5, 1fr);
+            gap: 10px;
+            width: 80%;
+            height: 80%;
+        } /* Missing closing brace added here */
+        button {
+            background-color: black;
+            color: rgb(0, 255, 0);
+            font-size: 20px;
+            border: 1px solid rgb(0, 255, 0);
+            cursor: pointer;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            transition: background-color 0.3s ease;
+        }
+        button:hover {
+            background-color: rgb(31, 31, 31);
+        }
+    </style>
+</head>
+<body>
+
+       <div id="GRID">
+<button class="GRIDBUTTON" onclick="PushInteger(10001)" title="">Like (10001)</button>
+<button class="GRIDBUTTON" onclick="PushInteger(10002)" title="">Task done ✅ (10002)</button>
+<button class="GRIDBUTTON" onclick="PushInteger(0)" title=""> (0)</button>
+<button class="GRIDBUTTON" onclick="PushInteger(1)" title=""> (1)</button>
+<button class="GRIDBUTTON" onclick="PushInteger(42)" title=""> (42)</button>
+<button class="GRIDBUTTON" onclick="PushInteger(2501)" title=""> (2501)</button>
+<button class="GRIDBUTTON" onclick="PushInteger(314)" title=""> (314)</button>
+<button class="GRIDBUTTON" onclick="PushInteger(31418)" title=""> (31418)</button>
+<button class="GRIDBUTTON" onclick="PushInteger(7)" title=""> (7)</button>
+<button class="GRIDBUTTON" onclick="PushInteger(1899887766)" title=""> (1899887766)</button>
+<button class="GRIDBUTTON" onclick="PushInteger(200990000)" title=""> (200990000)</button>
+<button class="GRIDBUTTON" onclick="PushInteger(201009900)" title=""> (201009900)</button>
+<button class="GRIDBUTTON" onclick="PushInteger(299000099)" title=""> (299000099)</button>
+<button class="GRIDBUTTON" onclick="PushInteger(400)" title=""> (400)</button>
+<button class="GRIDBUTTON" onclick="PushInteger(403)" title=""> (403)</button>
+<button class="GRIDBUTTON" onclick="PushInteger(404)" title=""> (404)</button>
+<button class="GRIDBUTTON" onclick="PushInteger(102)" title=""> (102)</button>
+<button class="GRIDBUTTON" onclick="PushInteger(202)" title=""> (202)</button>
+<button class="GRIDBUTTON" onclick="PushInteger(103)" title=""> (103)</button>
+<button class="GRIDBUTTON" onclick="PushInteger(203)" title=""> (203)</button>
+<button class="GRIDBUTTON" onclick="PushInteger(104)" title=""> (104)</button>
+<button class="GRIDBUTTON" onclick="PushInteger(204)" title=""> (204)</button>
+<button class="GRIDBUTTON" onclick="PushInteger(305)" title=""> (305)</button>
+<button class="GRIDBUTTON" onclick="PushInteger(205)" title=""> (205)</button>
+<button class="GRIDBUTTON" onclick="PushInteger(105)" title=""> (105)</button>
+<button class="GRIDBUTTON" onclick="PushInteger(306)" title=""> (306)</button>
+<button class="GRIDBUTTON" onclick="PushInteger(501)" title=""> (501)</button>
+<button class="GRIDBUTTON" onclick="PushInteger(502)" title=""> (502)</button>
+<button class="GRIDBUTTON" onclick="PushInteger(503)" title=""> (503)</button>
+<button class="GRIDBUTTON" onclick="PushInteger(504)" title=""> (504)</button>
+<button class="GRIDBUTTON" onclick="PushInteger(505)" title=""> (505)</button>
+<button class="GRIDBUTTON" onclick="PushInteger(601)" title=""> (601)</button>
+<button class="GRIDBUTTON" onclick="PushInteger(602)" title=""> (602)</button>
+<button class="GRIDBUTTON" onclick="PushInteger(603)" title=""> (603)</button>
+<button class="GRIDBUTTON" onclick="PushInteger(604)" title=""> (604)</button>
+<button class="GRIDBUTTON" onclick="PushInteger(605)" title=""> (605)</button>
+<button class="GRIDBUTTON" onclick="PushInteger(606)" title=""> (606)</button>
+<button class="GRIDBUTTON" onclick="PushInteger(607)" title=""> (607)</button>
+<button class="GRIDBUTTON" onclick="PushInteger(608)" title=""> (608)</button>
+<button class="GRIDBUTTON" onclick="PushInteger(609)" title=""> (609)</button>
+<button class="GRIDBUTTON" onclick="PushInteger(610)" title=""> (610)</button>
+<button class="GRIDBUTTON" onclick="PushInteger(20001)" title="">✅ Approval & Completion (20001)</button>
+<button class="GRIDBUTTON" onclick="PushInteger(20002)" title="">✅ Task done / Agreement (20002)</button>
+<button class="GRIDBUTTON" onclick="PushInteger(20003)" title="">✔ Checked & confirmed (20003)</button>
+<button class="GRIDBUTTON" onclick="PushInteger(20004)" title="">🆗 Okay, got it (20004)</button>
+<button class="GRIDBUTTON" onclick="PushInteger(20005)" title="">👍 Approval / Acknowledgment (20005)</button>
+<button class="GRIDBUTTON" onclick="PushInteger(20006)" title="">👏 Appreciation / Well done! (20006)</button>
+<button class="GRIDBUTTON" onclick="PushInteger(20007)" title="">🎉 Celebration / Success (20007)</button>
+<button class="GRIDBUTTON" onclick="PushInteger(20008)" title="">⏳ Time & Urgency (20008)</button>
+<button class="GRIDBUTTON" onclick="PushInteger(20009)" title="">⏳ Work in progress (20009)</button>
+<button class="GRIDBUTTON" onclick="PushInteger(20010)" title="">⏰ Deadline approaching (20010)</button>
+<button class="GRIDBUTTON" onclick="PushInteger(20011)" title="">⚡ Urgent / High priority (20011)</button>
+<button class="GRIDBUTTON" onclick="PushInteger(20012)" title="">🔥 Critical / Important issue (20012)</button>
+<button class="GRIDBUTTON" onclick="PushInteger(20013)" title="">🚀 Progress & Motivation (20013)</button>
+<button class="GRIDBUTTON" onclick="PushInteger(20014)" title="">🚀 Big launch / Moving fast (20014)</button>
+<button class="GRIDBUTTON" onclick="PushInteger(20015)" title="">🎯 Target achieved (20015)</button>
+<button class="GRIDBUTTON" onclick="PushInteger(20016)" title="">💡 Ideas & Discussions (20016)</button>
+<button class="GRIDBUTTON" onclick="PushInteger(20017)" title="">🤔 Thinking / Considering options (20017)</button>
+<button class="GRIDBUTTON" onclick="PushInteger(20018)" title="">❓ Question / Clarification needed (20018)</button>
+<button class="GRIDBUTTON" onclick="PushInteger(20019)" title="">🤝 Collaboration / Teamwork (20019)</button>
+<button class="GRIDBUTTON" onclick="PushInteger(20020)" title="">🔧 Tech & Fixes (20020)</button>
+<button class="GRIDBUTTON" onclick="PushInteger(20021)" title="">🛠 Fixing / Maintenance (20021)</button>
+<button class="GRIDBUTTON" onclick="PushInteger(20022)" title="">🐛 Bug detected (20022)</button>
+<button class="GRIDBUTTON" onclick="PushInteger(20023)" title="">🚧 Work in progress / Under construction (20023)</button>
+<button class="GRIDBUTTON" onclick="PushInteger(20024)" title="">🚨 Warnings & Issues (20024)</button>
+<button class="GRIDBUTTON" onclick="PushInteger(20025)" title="">⚠ Caution / Attention needed (20025)</button>
+<button class="GRIDBUTTON" onclick="PushInteger(20026)" title="">🛑 Stop / Blocker (20026)</button>
+<button class="GRIDBUTTON" onclick="PushInteger(20027)" title="">🔍 Review needed / Investigate (20027)</button>
+<button class="GRIDBUTTON" onclick="PushInteger(20028)" title="">💬 Communication & Engagement (20028)</button>
+<button class="GRIDBUTTON" onclick="PushInteger(20029)" title="">📢 Announcement (20029)</button>
+<button class="GRIDBUTTON" onclick="PushInteger(20030)" title="">🔔 Reminder / Notification (20030)</button>
+<button class="GRIDBUTTON" onclick="PushInteger(20031)" title="">📌 Important note (20031)</button>
+<button class="GRIDBUTTON" onclick="PushInteger(20032)" title="">💪 Keep going! (20032)</button>
+<button class="GRIDBUTTON" onclick="PushInteger(20033)" title="">💥 Unexpected issue (20033)</button>
+<button class="GRIDBUTTON" onclick="PushInteger(20034)" title="">⚡ Powering through (20034)</button>
+<button class="GRIDBUTTON" onclick="PushInteger(20035)" title="">📦 Package received/shipped (20035)</button>
+<button class="GRIDBUTTON" onclick="PushInteger(20036)" title="">☕ Break time / Coffee chat (20036)</button>
+<button class="GRIDBUTTON" onclick="PushInteger(20037)" title="">🍕 Team treat / Celebration (20037)</button>
+<button class="GRIDBUTTON" onclick="PushInteger(20038)" title="">📝 Taking notes (20038)</button>
+<button class="GRIDBUTTON" onclick="PushInteger(20039)" title="">👀 Checking on something (20039)</button>
+<button class="GRIDBUTTON" onclick="PushInteger(20040)" title="">🤷 Not sure / Need more info (20040)</button>
+<button class="GRIDBUTTON" onclick="PushInteger(20041)" title="">🚨 Emergency / Immediate action needed (20041)</button>
+<button class="GRIDBUTTON" onclick="PushInteger(20042)" title="">🙌 Great job / Excitement (20042)</button>
+<button class="GRIDBUTTON" onclick="PushInteger(20043)" title="">🤝 Agreed / Deal (20043)</button>
+<button class="GRIDBUTTON" onclick="PushInteger(20044)" title="">🚧 Work in progress / Temporary issue (20044)</button>
+<button class="GRIDBUTTON" onclick="PushInteger(20045)" title="">🤔 Needs review (20045)</button>
+<button class="GRIDBUTTON" onclick="PushInteger(20046)" title="">💾 Saving files / Backup (20046)</button>
+<button class="GRIDBUTTON" onclick="PushInteger(20047)" title="">🍻 Cheers! / Team celebration (20047)</button>
+<button class="GRIDBUTTON" onclick="PushInteger(20048)" title="">🍺 Casual drinks / Happy hour (20048)</button>
+<button class="GRIDBUTTON" onclick="PushInteger(20049)" title="">🔥 Critical issue (20049)</button>
+<button class="GRIDBUTTON" onclick="PushInteger(20050)" title="">⏰ Deadline approaching (20050)</button>
+<button class="GRIDBUTTON" onclick="PushInteger(20051)" title="">😂 That was funny! (20051)</button>
+<button class="GRIDBUTTON" onclick="PushInteger(20052)" title="">📌 Important! Please check (20052)</button>
+<button class="GRIDBUTTON" onclick="PushInteger(20053)" title="">👉 Point to note (20053)</button>
+<button class="GRIDBUTTON" onclick="PushInteger(20054)" title="">🔵 (Blue) Can you make this blue? (20054)</button>
+<button class="GRIDBUTTON" onclick="PushInteger(20055)" title="">🔴 (Red) Please highlight this in red! (20055)</button>
+<button class="GRIDBUTTON" onclick="PushInteger(20056)" title="">🟢 (Green) Can we use green for this section? (20056)</button>
+<button class="GRIDBUTTON" onclick="PushInteger(20057)" title="">🟡 (Yellow) Mark this in yellow for visibility (20057)</button>
+<button class="GRIDBUTTON" onclick="PushInteger(20058)" title="">🟣 (Purple) Let’s test this color variation (20058)</button>
+<button class="GRIDBUTTON" onclick="PushInteger(20059)" title="">⚫ (Black) Can you darken the text? (20059)</button>
+<button class="GRIDBUTTON" onclick="PushInteger(20060)" title="">⚪ (White) Add a white background here (20060)</button>
+<button class="GRIDBUTTON" onclick="PushInteger(20061)" title="">🎨 Design & Creativity (20061)</button>
+</div>
+<div id="LINEARRAY">
+<div class="LINEBUTTONDIV"><button onclick="PushInteger(10001)" title="">Like (10001)</button><span></span></div>
+<div class="LINEBUTTONDIV"><button onclick="PushInteger(10002)" title="">Task done ✅ (10002)</button><span></span></div>
+<div class="LINEBUTTONDIV"><button onclick="PushInteger(0)" title=""> (0)</button><span></span></div>
+<div class="LINEBUTTONDIV"><button onclick="PushInteger(1)" title=""> (1)</button><span></span></div>
+<div class="LINEBUTTONDIV"><button onclick="PushInteger(42)" title=""> (42)</button><span></span></div>
+<div class="LINEBUTTONDIV"><button onclick="PushInteger(2501)" title=""> (2501)</button><span></span></div>
+<div class="LINEBUTTONDIV"><button onclick="PushInteger(314)" title=""> (314)</button><span></span></div>
+<div class="LINEBUTTONDIV"><button onclick="PushInteger(31418)" title=""> (31418)</button><span></span></div>
+<div class="LINEBUTTONDIV"><button onclick="PushInteger(7)" title=""> (7)</button><span></span></div>
+<div class="LINEBUTTONDIV"><button onclick="PushInteger(1899887766)" title=""> (1899887766)</button><span></span></div>
+<div class="LINEBUTTONDIV"><button onclick="PushInteger(200990000)" title=""> (200990000)</button><span></span></div>
+<div class="LINEBUTTONDIV"><button onclick="PushInteger(201009900)" title=""> (201009900)</button><span></span></div>
+<div class="LINEBUTTONDIV"><button onclick="PushInteger(299000099)" title=""> (299000099)</button><span></span></div>
+<div class="LINEBUTTONDIV"><button onclick="PushInteger(400)" title=""> (400)</button><span></span></div>
+<div class="LINEBUTTONDIV"><button onclick="PushInteger(403)" title=""> (403)</button><span></span></div>
+<div class="LINEBUTTONDIV"><button onclick="PushInteger(404)" title=""> (404)</button><span></span></div>
+<div class="LINEBUTTONDIV"><button onclick="PushInteger(102)" title=""> (102)</button><span></span></div>
+<div class="LINEBUTTONDIV"><button onclick="PushInteger(202)" title=""> (202)</button><span></span></div>
+<div class="LINEBUTTONDIV"><button onclick="PushInteger(103)" title=""> (103)</button><span></span></div>
+<div class="LINEBUTTONDIV"><button onclick="PushInteger(203)" title=""> (203)</button><span></span></div>
+<div class="LINEBUTTONDIV"><button onclick="PushInteger(104)" title=""> (104)</button><span></span></div>
+<div class="LINEBUTTONDIV"><button onclick="PushInteger(204)" title=""> (204)</button><span></span></div>
+<div class="LINEBUTTONDIV"><button onclick="PushInteger(305)" title=""> (305)</button><span></span></div>
+<div class="LINEBUTTONDIV"><button onclick="PushInteger(205)" title=""> (205)</button><span></span></div>
+<div class="LINEBUTTONDIV"><button onclick="PushInteger(105)" title=""> (105)</button><span></span></div>
+<div class="LINEBUTTONDIV"><button onclick="PushInteger(306)" title=""> (306)</button><span></span></div>
+<div class="LINEBUTTONDIV"><button onclick="PushInteger(501)" title=""> (501)</button><span></span></div>
+<div class="LINEBUTTONDIV"><button onclick="PushInteger(502)" title=""> (502)</button><span></span></div>
+<div class="LINEBUTTONDIV"><button onclick="PushInteger(503)" title=""> (503)</button><span></span></div>
+<div class="LINEBUTTONDIV"><button onclick="PushInteger(504)" title=""> (504)</button><span></span></div>
+<div class="LINEBUTTONDIV"><button onclick="PushInteger(505)" title=""> (505)</button><span></span></div>
+<div class="LINEBUTTONDIV"><button onclick="PushInteger(601)" title=""> (601)</button><span></span></div>
+<div class="LINEBUTTONDIV"><button onclick="PushInteger(602)" title=""> (602)</button><span></span></div>
+<div class="LINEBUTTONDIV"><button onclick="PushInteger(603)" title=""> (603)</button><span></span></div>
+<div class="LINEBUTTONDIV"><button onclick="PushInteger(604)" title=""> (604)</button><span></span></div>
+<div class="LINEBUTTONDIV"><button onclick="PushInteger(605)" title=""> (605)</button><span></span></div>
+<div class="LINEBUTTONDIV"><button onclick="PushInteger(606)" title=""> (606)</button><span></span></div>
+<div class="LINEBUTTONDIV"><button onclick="PushInteger(607)" title=""> (607)</button><span></span></div>
+<div class="LINEBUTTONDIV"><button onclick="PushInteger(608)" title=""> (608)</button><span></span></div>
+<div class="LINEBUTTONDIV"><button onclick="PushInteger(609)" title=""> (609)</button><span></span></div>
+<div class="LINEBUTTONDIV"><button onclick="PushInteger(610)" title=""> (610)</button><span></span></div>
+<div class="LINEBUTTONDIV"><button onclick="PushInteger(20001)" title="">✅ Approval & Completion (20001)</button><span></span></div>
+<div class="LINEBUTTONDIV"><button onclick="PushInteger(20002)" title="">✅ Task done / Agreement (20002)</button><span></span></div>
+<div class="LINEBUTTONDIV"><button onclick="PushInteger(20003)" title="">✔ Checked & confirmed (20003)</button><span></span></div>
+<div class="LINEBUTTONDIV"><button onclick="PushInteger(20004)" title="">🆗 Okay, got it (20004)</button><span></span></div>
+<div class="LINEBUTTONDIV"><button onclick="PushInteger(20005)" title="">👍 Approval / Acknowledgment (20005)</button><span></span></div>
+<div class="LINEBUTTONDIV"><button onclick="PushInteger(20006)" title="">👏 Appreciation / Well done! (20006)</button><span></span></div>
+<div class="LINEBUTTONDIV"><button onclick="PushInteger(20007)" title="">🎉 Celebration / Success (20007)</button><span></span></div>
+<div class="LINEBUTTONDIV"><button onclick="PushInteger(20008)" title="">⏳ Time & Urgency (20008)</button><span></span></div>
+<div class="LINEBUTTONDIV"><button onclick="PushInteger(20009)" title="">⏳ Work in progress (20009)</button><span></span></div>
+<div class="LINEBUTTONDIV"><button onclick="PushInteger(20010)" title="">⏰ Deadline approaching (20010)</button><span></span></div>
+<div class="LINEBUTTONDIV"><button onclick="PushInteger(20011)" title="">⚡ Urgent / High priority (20011)</button><span></span></div>
+<div class="LINEBUTTONDIV"><button onclick="PushInteger(20012)" title="">🔥 Critical / Important issue (20012)</button><span></span></div>
+<div class="LINEBUTTONDIV"><button onclick="PushInteger(20013)" title="">🚀 Progress & Motivation (20013)</button><span></span></div>
+<div class="LINEBUTTONDIV"><button onclick="PushInteger(20014)" title="">🚀 Big launch / Moving fast (20014)</button><span></span></div>
+<div class="LINEBUTTONDIV"><button onclick="PushInteger(20015)" title="">🎯 Target achieved (20015)</button><span></span></div>
+<div class="LINEBUTTONDIV"><button onclick="PushInteger(20016)" title="">💡 Ideas & Discussions (20016)</button><span></span></div>
+<div class="LINEBUTTONDIV"><button onclick="PushInteger(20017)" title="">🤔 Thinking / Considering options (20017)</button><span></span></div>
+<div class="LINEBUTTONDIV"><button onclick="PushInteger(20018)" title="">❓ Question / Clarification needed (20018)</button><span></span></div>
+<div class="LINEBUTTONDIV"><button onclick="PushInteger(20019)" title="">🤝 Collaboration / Teamwork (20019)</button><span></span></div>
+<div class="LINEBUTTONDIV"><button onclick="PushInteger(20020)" title="">🔧 Tech & Fixes (20020)</button><span></span></div>
+<div class="LINEBUTTONDIV"><button onclick="PushInteger(20021)" title="">🛠 Fixing / Maintenance (20021)</button><span></span></div>
+<div class="LINEBUTTONDIV"><button onclick="PushInteger(20022)" title="">🐛 Bug detected (20022)</button><span></span></div>
+<div class="LINEBUTTONDIV"><button onclick="PushInteger(20023)" title="">🚧 Work in progress / Under construction (20023)</button><span></span></div>
+<div class="LINEBUTTONDIV"><button onclick="PushInteger(20024)" title="">🚨 Warnings & Issues (20024)</button><span></span></div>
+<div class="LINEBUTTONDIV"><button onclick="PushInteger(20025)" title="">⚠ Caution / Attention needed (20025)</button><span></span></div>
+<div class="LINEBUTTONDIV"><button onclick="PushInteger(20026)" title="">🛑 Stop / Blocker (20026)</button><span></span></div>
+<div class="LINEBUTTONDIV"><button onclick="PushInteger(20027)" title="">🔍 Review needed / Investigate (20027)</button><span></span></div>
+<div class="LINEBUTTONDIV"><button onclick="PushInteger(20028)" title="">💬 Communication & Engagement (20028)</button><span></span></div>
+<div class="LINEBUTTONDIV"><button onclick="PushInteger(20029)" title="">📢 Announcement (20029)</button><span></span></div>
+<div class="LINEBUTTONDIV"><button onclick="PushInteger(20030)" title="">🔔 Reminder / Notification (20030)</button><span></span></div>
+<div class="LINEBUTTONDIV"><button onclick="PushInteger(20031)" title="">📌 Important note (20031)</button><span></span></div>
+<div class="LINEBUTTONDIV"><button onclick="PushInteger(20032)" title="">💪 Keep going! (20032)</button><span></span></div>
+<div class="LINEBUTTONDIV"><button onclick="PushInteger(20033)" title="">💥 Unexpected issue (20033)</button><span></span></div>
+<div class="LINEBUTTONDIV"><button onclick="PushInteger(20034)" title="">⚡ Powering through (20034)</button><span></span></div>
+<div class="LINEBUTTONDIV"><button onclick="PushInteger(20035)" title="">📦 Package received/shipped (20035)</button><span></span></div>
+<div class="LINEBUTTONDIV"><button onclick="PushInteger(20036)" title="">☕ Break time / Coffee chat (20036)</button><span></span></div>
+<div class="LINEBUTTONDIV"><button onclick="PushInteger(20037)" title="">🍕 Team treat / Celebration (20037)</button><span></span></div>
+<div class="LINEBUTTONDIV"><button onclick="PushInteger(20038)" title="">📝 Taking notes (20038)</button><span></span></div>
+<div class="LINEBUTTONDIV"><button onclick="PushInteger(20039)" title="">👀 Checking on something (20039)</button><span></span></div>
+<div class="LINEBUTTONDIV"><button onclick="PushInteger(20040)" title="">🤷 Not sure / Need more info (20040)</button><span></span></div>
+<div class="LINEBUTTONDIV"><button onclick="PushInteger(20041)" title="">🚨 Emergency / Immediate action needed (20041)</button><span></span></div>
+<div class="LINEBUTTONDIV"><button onclick="PushInteger(20042)" title="">🙌 Great job / Excitement (20042)</button><span></span></div>
+<div class="LINEBUTTONDIV"><button onclick="PushInteger(20043)" title="">🤝 Agreed / Deal (20043)</button><span></span></div>
+<div class="LINEBUTTONDIV"><button onclick="PushInteger(20044)" title="">🚧 Work in progress / Temporary issue (20044)</button><span></span></div>
+<div class="LINEBUTTONDIV"><button onclick="PushInteger(20045)" title="">🤔 Needs review (20045)</button><span></span></div>
+<div class="LINEBUTTONDIV"><button onclick="PushInteger(20046)" title="">💾 Saving files / Backup (20046)</button><span></span></div>
+<div class="LINEBUTTONDIV"><button onclick="PushInteger(20047)" title="">🍻 Cheers! / Team celebration (20047)</button><span></span></div>
+<div class="LINEBUTTONDIV"><button onclick="PushInteger(20048)" title="">🍺 Casual drinks / Happy hour (20048)</button><span></span></div>
+<div class="LINEBUTTONDIV"><button onclick="PushInteger(20049)" title="">🔥 Critical issue (20049)</button><span></span></div>
+<div class="LINEBUTTONDIV"><button onclick="PushInteger(20050)" title="">⏰ Deadline approaching (20050)</button><span></span></div>
+<div class="LINEBUTTONDIV"><button onclick="PushInteger(20051)" title="">😂 That was funny! (20051)</button><span></span></div>
+<div class="LINEBUTTONDIV"><button onclick="PushInteger(20052)" title="">📌 Important! Please check (20052)</button><span></span></div>
+<div class="LINEBUTTONDIV"><button onclick="PushInteger(20053)" title="">👉 Point to note (20053)</button><span></span></div>
+<div class="LINEBUTTONDIV"><button onclick="PushInteger(20054)" title="">🔵 (Blue) Can you make this blue? (20054)</button><span></span></div>
+<div class="LINEBUTTONDIV"><button onclick="PushInteger(20055)" title="">🔴 (Red) Please highlight this in red! (20055)</button><span></span></div>
+<div class="LINEBUTTONDIV"><button onclick="PushInteger(20056)" title="">🟢 (Green) Can we use green for this section? (20056)</button><span></span></div>
+<div class="LINEBUTTONDIV"><button onclick="PushInteger(20057)" title="">🟡 (Yellow) Mark this in yellow for visibility (20057)</button><span></span></div>
+<div class="LINEBUTTONDIV"><button onclick="PushInteger(20058)" title="">🟣 (Purple) Let’s test this color variation (20058)</button><span></span></div>
+<div class="LINEBUTTONDIV"><button onclick="PushInteger(20059)" title="">⚫ (Black) Can you darken the text? (20059)</button><span></span></div>
+<div class="LINEBUTTONDIV"><button onclick="PushInteger(20060)" title="">⚪ (White) Add a white background here (20060)</button><span></span></div>
+<div class="LINEBUTTONDIV"><button onclick="PushInteger(20061)" title="">🎨 Design & Creativity (20061)</button><span></span></div>
+</div>
+
+      
+    <script>
+        function PushInteger(valueInteger) {
+            console.log("Button " + valueInteger + " clicked");
+        }
+    </script>
+</body>
+</html>
