@@ -8,6 +8,8 @@
 # http://raspberrypi:8080/client
 # http://raspberrypi:8080/ntp
 
+bool_allows_to_reboot = False
+bool_allows_to_reboot = True
 
 import os
 import sys
@@ -57,18 +59,7 @@ def get_service_status(service):
 
 @app.route('/')
 def home():
-    return """
-
-Hello, World!
-- raspberrypi.local:8080/client
-- raspberrypi.local:8080/services
-- raspberrypi.local:8080/ntp
-
-If my Raspberry Pi at home is on
-- http://apint-home.ddns.net:8080/services
-- http://apint-home.ddns.net:8080/ntp
-
-"""
+    return render_template("WWW/client_index.html")
 
 def replace_body_in_default_html(body):
     html_page_to_load= "WWW/insert_body_here.html"
@@ -104,10 +95,21 @@ def client_page():
     return render_template('RunClient.html')
 
 
+@app.route('/web3-min-js')
+def web3_min_js():
+    return render_template('WWW/web3.min.js')
+
 @app.route('/ntp')
 def ntp_page():
     return render_template('WWW/client_ntp_page.html')
 
+@app.route('/reboot')
+def reboot_page():
+    if not bool_allows_to_reboot:
+        return "Rebooting not allowed"
+    else :  
+        os.system("sudo reboot")
+        return "Rebooting..."
 
 @app.route('/ntp-offset', methods=['POST'])
 def ntp_post_offset():
