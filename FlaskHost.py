@@ -58,9 +58,16 @@ def get_service_status(service):
 @app.route('/')
 def home():
     return """
+
 Hello, World!
 - raspberrypi.local:8080/client
 - raspberrypi.local:8080/services
+- raspberrypi.local:8080/ntp
+
+If my Raspberry Pi at home is on
+- http://apint-home.ddns.net:8080/services
+- http://apint-home.ddns.net:8080/ntp
+
 """
 
 def replace_body_in_default_html(body):

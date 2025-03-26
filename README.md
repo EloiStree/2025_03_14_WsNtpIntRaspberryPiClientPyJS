@@ -201,3 +201,10 @@ Unit=apint_flask.service
 [Install]
 WantedBy=timers.target
 ```
+
+
+
+- http://raspberrypi:8080/services
+- http://raspberrypi:8080/client
+- http://raspberrypi:8080/ntp
+- http://raspberrypi:8080/
